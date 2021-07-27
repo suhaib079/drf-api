@@ -5,6 +5,7 @@ from django.db import models
 from rest_framework import generics
 from .models import Motor
 from .serializer import SerializerMotor
+from .permissions import IsAuthorOrReadOnly
 
 # Create your views here.
 class PostsListView(generics.ListCreateAPIView):
@@ -14,3 +15,4 @@ class PostsListView(generics.ListCreateAPIView):
 class PostDetailsView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SerializerMotor
     queryset = Motor.objects.all()
+    permission_classes = (IsAuthorOrReadOnly,)
